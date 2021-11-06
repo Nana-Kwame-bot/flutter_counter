@@ -14,9 +14,6 @@ class CounterPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) => CounterBloc(),
-      child: const CounterView(),
-    );
+    return const CounterView();
   }
 }

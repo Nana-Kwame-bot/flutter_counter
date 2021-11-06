@@ -47,9 +47,63 @@ class CounterView extends StatelessWidget {
             onPressed: () => context.read<CounterBloc>().add(Increment()),
           ),
           const SizedBox(height: 8),
-          FloatingActionButton(
+          OutlinedButton(
             child: const Icon(Icons.remove),
             onPressed: () => context.read<CounterBloc>().add(Decrement()),
+          ),
+          const SizedBox(height: 8),
+          OutlinedButton(
+            child: const Icon(Icons.navigate_next),
+            onPressed: () {
+              Navigator.pushNamed(context, '/second');
+              // Navigator.of(context).push(MaterialPageRoute(builder: (context) {
+              //   return const SecondScreen();
+              // }));
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class SecondScreen extends StatelessWidget {
+  const SecondScreen({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+    return Scaffold(
+      body: Container(
+        alignment: Alignment.center,
+        child: BlocBuilder<CounterBloc, CounterState>(
+          builder: (context, state) {
+            return Text(
+              '${state.counter}',
+              style: textTheme.headline2,
+            );
+          },
+        ),
+      ),
+      floatingActionButton: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          FloatingActionButton(
+            child: const Icon(Icons.add),
+            onPressed: () => context.read<CounterBloc>().add(Increment()),
+          ),
+          const SizedBox(height: 8),
+          OutlinedButton(
+            child: const Icon(Icons.remove),
+            onPressed: () => context.read<CounterBloc>().add(Decrement()),
+          ),
+          const SizedBox(height: 8),
+          OutlinedButton(
+            child: const Icon(Icons.navigate_before),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
           ),
         ],
       ),
