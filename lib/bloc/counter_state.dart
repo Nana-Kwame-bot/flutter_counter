@@ -1,28 +1,16 @@
 part of 'counter_bloc.dart';
 
 @immutable
-abstract class CounterState {
+abstract class CounterState extends Equatable {
   final int counter;
 
-  const CounterState(
-    this.counter,
-  );
+  const CounterState({required this.counter});
 
   @override
-  String toString() => 'CounterState(counter: $counter)';
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-  
-    return other is CounterState &&
-      other.counter == counter;
-  }
-
-  @override
-  int get hashCode => counter.hashCode;
+  List<Object?> get props => [counter];
 }
 
+//don't put get props down here but up there
 class CounterInitial extends CounterState {
-  const CounterInitial(int counter) : super(counter);
+  const CounterInitial(int counter) : super(counter: counter);
 }

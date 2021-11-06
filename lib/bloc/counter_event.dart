@@ -1,14 +1,19 @@
 part of 'counter_bloc.dart';
 
 @immutable
-abstract class CounterEvent {}
-
-class Increment extends CounterEvent {
+abstract class CounterEvent extends Equatable {
   @override
-  String toString() => 'Increment';
+  List<Object> get props => [];
+}
+
+//don't put get props in the non-abstract classes or else you will get instance
+//of INcrement shit
+class Increment extends CounterEvent {
+  // @override
+  // String toString() => 'Increment';
 }
 
 class Decrement extends CounterEvent {
-  @override
-  String toString() => 'Decrement';
+  // @override
+  // String toString() => 'Decrement';
 }

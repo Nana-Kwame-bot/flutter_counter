@@ -18,12 +18,23 @@ class CounterView extends StatelessWidget {
         title: const Text('Counter'),
       ),
       body: Center(
-        child: BlocBuilder<CounterBloc, CounterState>(
+        child: BlocConsumer<CounterBloc, CounterState>(
           builder: (context, state) {
             return Text(
               '${state.counter}',
               style: textTheme.headline2,
             );
+          },
+          listener: (context, CounterState state) {
+            if (state.counter % 2 == 0) {
+              ScaffoldMessenger.of(context)
+                ..hideCurrentSnackBar()
+                ..showSnackBar(
+                  const SnackBar(
+                    content: Text("Even number"),
+                  ),
+                );
+            }
           },
         ),
       ),
@@ -32,13 +43,11 @@ class CounterView extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.end,
         children: <Widget>[
           FloatingActionButton(
-            key: const Key('counterView_increment_floatingActionButton'),
             child: const Icon(Icons.add),
             onPressed: () => context.read<CounterBloc>().add(Increment()),
           ),
           const SizedBox(height: 8),
           FloatingActionButton(
-            key: const Key('counterView_decrement_floatingActionButton'),
             child: const Icon(Icons.remove),
             onPressed: () => context.read<CounterBloc>().add(Decrement()),
           ),

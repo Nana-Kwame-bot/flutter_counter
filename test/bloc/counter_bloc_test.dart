@@ -10,12 +10,21 @@ void main() {
       counterBloc = CounterBloc();
     });
 
-    test('initial state is 0', () {
+    tearDown(() {
+      counterBloc.close();
+    });
+
+    test('initial state is CounterInitial(0)', () {
       expect(counterBloc.state, const CounterInitial(0));
     });
 
+    //  expect(CounterCubit().state, equals(0));
+    //         expect: () => [equals(1)],
+
+//they are in square backets because more than one event can be emitted as
+//an iterable
     blocTest(
-      'emits [1] when CounterEvent.increment is added',
+      'emits CounterInitial(1) when CounterEvent.increment is added',
       build: () {
         return counterBloc;
       },
@@ -23,12 +32,12 @@ void main() {
         return bloc.add(Increment());
       },
       expect: () {
-        return const CounterInitial(1);
+        return [const CounterInitial(1)];
       },
     );
 
     blocTest(
-      'emits [-1] when CounterEvent.decrement is added',
+      'emits CounterInitial(-1) when CounterEvent.decrement is added',
       build: () {
         return counterBloc;
       },
@@ -36,7 +45,9 @@ void main() {
         return bloc.add(Decrement());
       },
       expect: () {
-        return const CounterInitial(-1);
+        return [const CounterInitial(-1)];
+
+        ///add [] more ifo from the 220 flutter europe bloc showcase
       },
     );
   });
