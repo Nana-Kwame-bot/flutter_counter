@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/counter/view/counter_view.dart';
+import '../../counter/view/counter_view.dart';
 
 class AppRouter {
   Route onGenerateRoute(RouteSettings routeSettings) {

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_counter/counter/counter.dart';
+
+import 'counter/counter.dart';
 import 'presentation/router/app_router.dart';
 
 final AppRouter _appRouter = AppRouter();
